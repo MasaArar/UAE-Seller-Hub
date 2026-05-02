@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%2260%22%20height%3D%2260%22%20rx%3D%2214%22%20fill%3D%22%230f1624%22%20stroke%3D%22%2300d478%22%20stroke-width%3D%222.5%22/%3E%3Cpath%20d%3D%22M20%2014%20L20%2050%22%20stroke%3D%22%2300d478%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M20%2014%20L34%2014%20C42%2014%2046%2019%2046%2025%20C46%2031%2042%2036%2034%2036%20L20%2036%22%20stroke%3D%22%2300d478%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22none%22/%3E%3Cpath%20d%3D%22M28%2050%20L36%2042%20L44%2046%20L48%2038%22%20stroke%3D%22%2300c4ff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22none%22/%3E%3C/svg%3E" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazon UAE Profit Calculator | Know Your Profit Before You Invest</title>
+  <meta name="description" content="Free Amazon UAE profit calculator for sellers. Calculate net profit, margin %, and ROI instantly. Built for UAE-based Amazon sellers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================
+       CSS CUSTOM PROPERTIES & RESET
+    ============================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:          #0a0f1a;
+      --bg-card:     #0f1624;
+      --bg-input:    #141d2e;
+      --bg-glass:    rgba(15, 22, 36, 0.85);
+      --border:      rgba(255,255,255,0.07);
+      --border-focus:rgba(0, 212, 120, 0.5);
+      --text-primary:  #eef2ff;
+      --text-secondary:#8b9cc4;
+      --text-muted:    #4e5f82;
+      --accent:        #00d478;
+      --accent-dim:    rgba(0, 212, 120, 0.12);
+      --accent-glow:   rgba(0, 212, 120, 0.25);
+      --danger:        #ff4d6d;
+      --danger-dim:    rgba(255, 77, 109, 0.12);
+      --gold:          #f5a623;
+      --blue:          #4f8ef7;
+      --radius-sm:   8px;
+      --radius:      14px;
+      --radius-lg:   20px;
+      --shadow-card: 0 2px 40px rgba(0,0,0,0.45);
+      --shadow-glow: 0 0 40px rgba(0, 212, 120, 0.15);
+      --font-main:   'Sora', sans-serif;
+      --font-mono:   'JetBrains Mono', monospace;
+      --transition:  0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ============================================
+       BACKGROUND DECORATION
+    ============================================ */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+    .bg-orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,212,120,0.3) 0%, transparent 70%);
+      top: -200px; left: -200px;
+    }
+    .bg-orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(79,142,247,0.2) 0%, transparent 70%);
+      bottom: -150px; right: -150px;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============================================
+       NAVIGATION
+    ============================================ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 15, 26, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), #00a85c);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+
+    .nav-badge {
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(0,212,120,0.2);
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================
+       HERO SECTION
+    ============================================ */
+    .hero {
+      padding: 72px 0 48px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(0,212,120,0.2);
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: blink 1.6s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 58px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #eef2ff 0%, #8b9cc4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), #00c4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--text-secondary);
+      font-weight: 400;
+      max-width: 520px;
+      margin: 0 auto 16px;
+    }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .hero-stat .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero-disclaimer {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin: 8px auto 0;
+      max-width: 460px;
+      letter-spacing: 0.01em;
+    }
+
+        /* ============================================
+       CALCULATOR SECTION
+    ============================================ */
+    .calc-section {
+      padding-bottom: 64px;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- CARD BASE ---- */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      transition: border-color var(--transition);
+    }
+
+    .card:hover {
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title::before {
+      content: '';
+      width: 3px; height: 14px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* ---- INPUT FIELDS ---- */
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-prefix {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      pointer-events: none;
+    }
+
+    .input-suffix {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      pointer-events: none;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 12px 44px 12px 42px;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+      -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"]:focus {
+      border-color: var(--border-focus);
+      background: rgba(20, 29, 46, 0.9);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    input[type="number"].error {
+      border-color: rgba(255,77,109,0.5);
+      box-shadow: 0 0 0 3px rgba(255,77,109,0.15);
+    }
+
+    .field-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    .field-error {
+      font-size: 11px;
+      color: var(--danger);
+      margin-top: 5px;
+      display: none;
+    }
+
+    /* VAT toggle */
+    .vat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      cursor: pointer;
+      transition: border-color var(--transition);
+    }
+
+    .vat-row:hover {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .vat-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .vat-label span:first-child {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .vat-label span:last-child {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Toggle switch */
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      width: 16px; height: 16px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+
+    .toggle input:checked + .toggle-slider::before {
+      transform: translateX(20px);
+      background: var(--accent);
+    }
+
+    /* Action buttons */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-reset {
+      flex: 1;
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-reset:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    /* ============================================
+       RESULTS CARD
+    ============================================ */
+    .results-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Main profit display */
+    .profit-display {
+      text-align: center;
+      padding: 28px 20px;
+      border-radius: var(--radius);
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition);
+    }
+
+    .profit-display.positive {
+      background: rgba(0, 212, 120, 0.06);
+      border-color: rgba(0, 212, 120, 0.25);
+      box-shadow: 0 0 40px rgba(0, 212, 120, 0.08);
+    }
+
+    .profit-display.negative {
+      background: rgba(255, 77, 109, 0.06);
+      border-color: rgba(255, 77, 109, 0.25);
+      box-shadow: 0 0 40px rgba(255, 77, 109, 0.08);
+    }
+
+    .profit-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .profit-amount {
+      font-family: var(--font-mono);
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      transition: color var(--transition);
+    }
+
+    .profit-amount.positive { color: var(--accent); }
+    .profit-amount.negative { color: var(--danger); }
+    .profit-amount.neutral  { color: var(--text-primary); }
+
+    .profit-currency {
+      font-size: 18px;
+      opacity: 0.7;
+    }
+
+    /* Metrics row */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .metric-box {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+      transition: border-color var(--transition);
+    }
+
+    .metric-box:hover {
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-primary);
+      transition: color var(--transition);
+    }
+
+    .metric-value.positive { color: var(--accent); }
+    .metric-value.negative { color: var(--danger); }
+
+    /* Breakdown */
+    .breakdown-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      padding-top: 4px;
+    }
+
+    .breakdown-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .breakdown-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+
+    .breakdown-item:hover {
+      background: rgba(255,255,255,0.03);
+    }
+
+    .breakdown-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .breakdown-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .breakdown-val {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Status pill */
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .status-pill.positive {
+      background: rgba(0,212,120,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(0,212,120,0.25);
+    }
+
+    .status-pill.negative {
+      background: rgba(255,77,109,0.12);
+      color: var(--danger);
+      border: 1px solid rgba(255,77,109,0.25);
+    }
+
+    .status-pill.neutral {
+      background: rgba(255,255,255,0.05);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    /* ============================================
+       COMMUNITY SECTION
+    ============================================ */
+    .community-section {
+      padding: 0 0 20px;
+    }
+
+    .community-card {
+      background: linear-gradient(135deg, rgba(37,211,102,0.07) 0%, rgba(0,212,120,0.04) 100%);
+      border: 1px solid rgba(37,211,102,0.2);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .community-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(37,211,102,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .community-left {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .community-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #25d366;
+      background: rgba(37,211,102,0.1);
+      border: 1px solid rgba(37,211,102,0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .community-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #25d366;
+      border-radius: 50%;
+      animation: blink 1.6s ease-in-out infinite;
+    }
+
+    .community-left h2 {
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .community-left p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .community-stats {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .c-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .c-stat-icon { font-size: 14px; }
+
+    .c-stat-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--border);
+      margin: 0 4px;
+    }
+
+    .community-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn-community {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25d366;
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: 0 4px 28px rgba(37,211,102,0.35);
+      white-space: nowrap;
+    }
+
+    .btn-community:hover {
+      background: #1ebe5a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 36px rgba(37,211,102,0.45);
+    }
+
+    .btn-community:active {
+      transform: translateY(0);
+    }
+
+    .community-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      margin: 0;
+    }
+
+    @media (max-width: 680px) {
+      .community-card {
+        padding: 28px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .community-right {
+        width: 100%;
+      }
+      .btn-community {
+        width: 100%;
+        justify-content: center;
+      }
+      .c-stat-divider { display: none; }
+    }
+
+    /* ============================================
+       SHARE SECTION
+    ============================================ */
+    .share-section {
+      padding: 0 0 64px;
+    }
+
+    .share-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .share-card-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .share-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .share-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .share-left h2 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .share-left p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .share-btns {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .btn-share {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 11px 18px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-share-wa {
+      background: rgba(37, 211, 102, 0.12);
+      color: #25d366;
+      border: 1px solid rgba(37, 211, 102, 0.25);
+    }
+
+    .btn-share-wa:hover {
+      background: rgba(37, 211, 102, 0.2);
+      border-color: rgba(37, 211, 102, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-share-copy {
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-share-copy:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-1px);
+    }
+
+    .btn-share-copy.copied {
+      color: var(--accent);
+      border-color: rgba(0,212,120,0.3);
+      background: var(--accent-dim);
+    }
+
+    @media (max-width: 600px) {
+      .share-card { padding: 20px; }
+      .share-card-inner { flex-direction: column; align-items: flex-start; }
+      .share-btns { width: 100%; }
+      .btn-share { flex: 1; justify-content: center; }
+    }
+
+    /* ============================================
+       INFO SECTION
+    ============================================ */
+    .info-section {
+      padding: 0 0 80px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(79,142,247,0.1);
+      border: 1px solid rgba(79,142,247,0.2);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .info-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .info-card:hover {
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+
+    .info-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+
+    .info-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .info-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--text-secondary);
+    }
+
+    /* ============================================
+       ANIMATIONS
+    ============================================ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .anim-1 { animation: fadeInUp 0.5s ease both; }
+    .anim-2 { animation: fadeInUp 0.5s 0.1s ease both; }
+    .anim-3 { animation: fadeInUp 0.5s 0.2s ease both; }
+    .anim-4 { animation: fadeInUp 0.5s 0.3s ease both; }
+
+    /* Number pulse on update */
+    @keyframes numPulse {
+      0%   { opacity: 0.5; transform: scale(0.97); }
+      100% { opacity: 1;   transform: scale(1); }
+    }
+
+    .pulse {
+      animation: numPulse 0.25s ease forwards;
+    }
+
+    /* ============================================
+       MOBILE ADJUSTMENTS
+    ============================================ */
+    @media (max-width: 600px) {
+      .hero { padding: 48px 0 32px; }
+      .card, .results-card { padding: 20px; }
+      .hero-stats { gap: 16px; }
+      .footer-inner { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Background decoration -->
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+<div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+
+<!-- ============================================
+     NAVIGATION
+============================================ -->
+<nav>
+  <div class="wrapper">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-icon" style="background:none;padding:0;width:32px;height:32px;"><svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+          <rect x="2" y="2" width="60" height="60" rx="14" fill="#0f1624" stroke="#00d478" stroke-width="2.5"/>
+          <path d="M20 14 L20 50" stroke="#00d478" stroke-width="5" stroke-linecap="round"/>
+          <path d="M20 14 L34 14 C42 14 46 19 46 25 C46 31 42 36 34 36 L20 36" stroke="#00d478" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M28 50 L36 42 L44 46 L48 38" stroke="#00c4ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg></div>
+        Profit<span style="color:#00d478;">Calc</span> <span style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">UAE</span>
+      </a>
+      <span class="nav-badge">Free Tool</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO SECTION
+============================================ -->
+<section class="hero">
+  <div class="wrapper">
+    <div class="hero-eyebrow anim-1">Built for UAE Amazon Sellers</div>
+    <h1 class="anim-2">
+      Calculate Your Amazon UAE<br/>
+      <span>Seller Profits</span>
+    </h1>
+    <p class="hero-sub anim-3">Know your exact profit, margin, and ROI before investing in any product.</p>
+    <p class="hero-disclaimer anim-3">This tool is an independent calculator and is not affiliated with or endorsed by Amazon.</p>
+
+    <div class="hero-stats anim-4">
+      <div class="hero-stat"><div class="dot"></div>Live calculations</div>
+      <div class="hero-stat"><div class="dot"></div>VAT included</div>
+      <div class="hero-stat"><div class="dot"></div>AED currency</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CALCULATOR SECTION
+============================================ -->
+<section class="calc-section">
+  <div class="wrapper">
+    <div class="calc-grid">
+
+      <!-- LEFT: INPUTS -->
+      <div class="card anim-3">
+        <div class="card-title">Product Details</div>
+
+        <!-- Product Cost -->
+        <div class="field">
+          <label for="productCost">Product Cost (Purchase Price)</label>
+          <div class="input-wrap">
+            <span class="input-prefix">AED</span>
+            <input type="number" id="productCost" placeholder="0.00" min="0" step="0.01" />
+          </div>
+          <div class="field-hint">What you pay the supplier per unit</div>
+          <div class="field-error" id="err-productCost">Must be a positive number</div>
+        </div>
+
+        <!-- Selling Price -->
+        <div class="field">
+          <label for="sellingPrice">Selling Price on Amazon</label>
+          <div class="input-wrap">
+            <span class="input-prefix">AED</span>
+            <input type="number" id="sellingPrice" placeholder="0.00" min="0" step="0.01" />
+          </div>
+          <div class="field-hint">Your listed price on Amazon UAE</div>
+          <div class="field-error" id="err-sellingPrice">Must be greater than 0</div>
+        </div>
+
+        <!-- Shipping Cost -->
+        <div class="field">
+          <label for="shippingCost">Shipping Cost (to Amazon / customer)</label>
+          <div class="input-wrap">
+            <span class="input-prefix">AED</span>
+            <input type="number" id="shippingCost" placeholder="0.00" min="0" step="0.01" />
+          </div>
+          <div class="field-hint">Include FBA fees or courier cost per unit</div>
+          <div class="field-error" id="err-shippingCost">Must be 0 or more</div>
+        </div>
+
+        <!-- Amazon Fee % -->
+        <div class="field">
+          <label for="amazonFee">Amazon Referral Fee</label>
+          <div class="input-wrap">
+            <input type="number" id="amazonFee" value="15" placeholder="15" min="0" max="100" step="0.1" style="padding-left: 14px; padding-right: 44px;" />
+            <span class="input-suffix">%</span>
+          </div>
+          <div class="field-hint">Default is 15% — varies by category</div>
+          <div class="field-error" id="err-amazonFee">Enter a value between 0–100%</div>
+        </div>
+
+        <!-- VAT Toggle -->
+        <label class="vat-row" for="vatToggle">
+          <div class="vat-label">
+            <span>Include 5% VAT</span>
+            <span>UAE Value Added Tax on selling price</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="vatToggle" />
+            <span class="toggle-slider"></span>
+          </label>
+        </label>
+
+        <!-- Reset Button -->
+        <div class="btn-row">
+          <button class="btn btn-reset" id="resetBtn">
+            ↺ Reset Calculator
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: RESULTS -->
+      <div class="results-card anim-4">
+        <div class="card-title">Profit Analysis</div>
+
+        <!-- Status pill -->
+        <div id="statusPill" class="status-pill neutral">⬤ &nbsp;Enter values to see results</div>
+
+        <!-- Net Profit display -->
+        <div class="profit-display" id="profitDisplay">
+          <div class="profit-label">Net Profit per Unit</div>
+          <div class="profit-amount neutral" id="profitAmount">
+            <span class="profit-currency">AED</span> 0.00
+          </div>
+        </div>
+
+        <!-- Margin & ROI -->
+        <div class="metrics-row">
+          <div class="metric-box">
+            <div class="metric-label">Profit Margin</div>
+            <div class="metric-value neutral" id="marginValue">0.00%</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">ROI</div>
+            <div class="metric-value neutral" id="roiValue">0.00%</div>
+          </div>
+        </div>
+
+        <!-- Cost Breakdown -->
+        <div class="breakdown-title">Cost Breakdown</div>
+        <div class="breakdown-list">
+          <div class="breakdown-item">
+            <div class="breakdown-item-left">
+              <div class="breakdown-dot" style="background:#4f8ef7"></div>
+              Product Cost
+            </div>
+            <div class="breakdown-val" id="bd-cost">AED 0.00</div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-item-left">
+              <div class="breakdown-dot" style="background:#f5a623"></div>
+              Shipping Cost
+            </div>
+            <div class="breakdown-val" id="bd-shipping">AED 0.00</div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-item-left">
+              <div class="breakdown-dot" style="background:#a78bfa"></div>
+              Amazon Fees
+            </div>
+            <div class="breakdown-val" id="bd-amazon">AED 0.00</div>
+          </div>
+          <div class="breakdown-item" id="vat-row" style="display:none;">
+            <div class="breakdown-item-left">
+              <div class="breakdown-dot" style="background:#fb923c"></div>
+              VAT (5%)
+            </div>
+            <div class="breakdown-val" id="bd-vat">AED 0.00</div>
+          </div>
+          <div class="breakdown-item" style="border-color: rgba(0,212,120,0.2); background: rgba(0,212,120,0.04);">
+            <div class="breakdown-item-left">
+              <div class="breakdown-dot" style="background:var(--accent)"></div>
+              <strong style="color:var(--text-primary);">Net Profit</strong>
+            </div>
+            <div class="breakdown-val" id="bd-profit" style="color:var(--accent);">AED 0.00</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     COMMUNITY + SHARE SECTION
+============================================ -->
+
+<!-- Community Banner -->
+<section class="community-section">
+  <div class="wrapper">
+    <div class="community-card">
+      <div class="community-left">
+        <div class="community-badge">Free Community</div>
+        <h2>Join the Amazon UAE Sellers Community</h2>
+        <p>Connect with fellow UAE sellers — share wins, ask questions, and stay ahead. Free to join, always.</p>
+        <div class="community-stats">
+          <div class="c-stat"><span class="c-stat-icon">🇦🇪</span> UAE-based sellers</div>
+          <div class="c-stat-divider"></div>
+          <div class="c-stat"><span class="c-stat-icon">💬</span> Tips & product ideas</div>
+          <div class="c-stat-divider"></div>
+          <div class="c-stat"><span class="c-stat-icon">🆓</span> Always free</div>
+        </div>
+      </div>
+      <div class="community-right">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeAAsyXZlvdDXp4w_rvSU5a2SSqMUPUDMwWwsuHKlQcmvpjjg/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" class="btn-community">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.49"/></svg>
+          Join WhatsApp Community
+        </a>
+        <p class="community-note">Opens WhatsApp — free to join &amp; leave anytime</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Share Strip -->
+<section class="share-section">
+  <div class="wrapper">
+    <div class="share-card">
+      <div class="share-card-inner">
+        <div class="share-left">
+          <div class="share-icon">🤝</div>
+          <div>
+            <h2>Know a UAE seller who'd find this useful?</h2>
+            <p>This tool is completely free. Share it with your network — no sign-up, no catch.</p>
+          </div>
+        </div>
+        <div class="share-btns">
+          <button class="btn-share btn-share-wa" onclick="shareWhatsApp()">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.49"/></svg>
+            Share Tool
+          </button>
+          <button class="btn-share btn-share-copy" onclick="copyLink()">
+            <span id="copyIcon">🔗</span>
+            <span id="copyText">Copy Link</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     INFO / SEO SECTION
+============================================ -->
+<section class="info-section">
+  <div class="wrapper">
+    <div class="section-header">
+      <div class="section-tag">Learn More</div>
+      <h2>How Amazon Fees & Profitability Work</h2>
+      <p>Understanding your cost structure is the foundation of a profitable Amazon business.</p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon" style="background:rgba(79,142,247,0.12);">📊</div>
+        <h3>Amazon Referral Fee</h3>
+        <p>Amazon charges a referral fee on every sale, typically 8%–15% depending on the product category. Electronics are usually lower; beauty and accessories are higher. Always check your specific category.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon" style="background:rgba(245,166,35,0.12);">🧾</div>
+        <h3>UAE VAT (5%)</h3>
+        <p>The UAE applies a 5% VAT on most products. If you're a VAT-registered seller, this is collected from the buyer — but it still affects your pricing strategy and net receipts.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon" style="background:rgba(0,212,120,0.12);">📦</div>
+        <h3>FBA vs FBM Shipping</h3>
+        <p>If you use Fulfillment by Amazon (FBA), your shipping cost includes FBA fees. If self-fulfilled (FBM), include your actual courier cost. This significantly impacts your margin calculation.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon" style="background:rgba(167,139,250,0.12);">💰</div>
+        <h3>Why Margin Matters</h3>
+        <p>A healthy Amazon margin is typically 20–30%+. Below 15%, it becomes hard to run ads (PPC) profitably. Always calculate margin before sourcing any product.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon" style="background:rgba(251,146,60,0.12);">📈</div>
+        <h3>ROI for Sellers</h3>
+        <p>ROI measures how much return you get on your invested capital (cost of goods + shipping). A 50%+ ROI per product cycle is considered strong for Amazon FBA sellers.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon" style="background:rgba(255,77,109,0.12);">⚠️</div>
+        <h3>Hidden Costs to Watch</h3>
+        <p>Don't forget: PPC advertising, return rates, storage fees, and product photography. Add these to your cost structure for a realistic profit picture before you commit to a product.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+============================================ -->
+<footer>
+  <div class="wrapper">
+    <div class="footer-inner">
+      <p>© 2025 ProfitCalc UAE — Free tool for Amazon sellers</p>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================
+     JAVASCRIPT — CALCULATOR LOGIC
+============================================ -->
+<script>
+  // ── DOM REFERENCES ──────────────────────────────────────────────
+  const inputProductCost  = document.getElementById('productCost');
+  const inputSellingPrice = document.getElementById('sellingPrice');
+  const inputShipping     = document.getElementById('shippingCost');
+  const inputAmazonFee    = document.getElementById('amazonFee');
+  const toggleVAT         = document.getElementById('vatToggle');
+  const btnReset          = document.getElementById('resetBtn');
+
+  const profitDisplay  = document.getElementById('profitDisplay');
+  const profitAmount   = document.getElementById('profitAmount');
+  const marginValue    = document.getElementById('marginValue');
+  const roiValue       = document.getElementById('roiValue');
+  const statusPill     = document.getElementById('statusPill');
+  const vatRow         = document.getElementById('vat-row');
+
+  const bdCost     = document.getElementById('bd-cost');
+  const bdShipping = document.getElementById('bd-shipping');
+  const bdAmazon   = document.getElementById('bd-amazon');
+  const bdVat      = document.getElementById('bd-vat');
+  const bdProfit   = document.getElementById('bd-profit');
+
+  // ── HELPERS ─────────────────────────────────────────────────────
+
+  /** Format number to 2 decimal places */
+  function fmt(n) {
+    return n.toFixed(2);
+  }
+
+  /** Animate a value change with a quick pulse */
+  function animateEl(el) {
+    el.classList.remove('pulse');
+    void el.offsetWidth; // reflow
+    el.classList.add('pulse');
+  }
+
+  /** Set color class (positive / negative / neutral) on element */
+  function setColorClass(el, value) {
+    el.classList.remove('positive', 'negative', 'neutral');
+    if (value > 0)  el.classList.add('positive');
+    else if (value < 0) el.classList.add('negative');
+    else el.classList.add('neutral');
+  }
+
+  /** Parse float from input, default to 0 if empty/invalid */
+  function parseVal(el) {
+    const v = parseFloat(el.value);
+    return isNaN(v) ? 0 : v;
+  }
+
+  // ── INPUT VALIDATION ────────────────────────────────────────────
+
+  function validateInput(inputEl, errorId, condition) {
+    const errEl = document.getElementById(errorId);
+    if (!condition) {
+      inputEl.classList.add('error');
+      errEl.style.display = 'block';
+      return false;
+    } else {
+      inputEl.classList.remove('error');
+      errEl.style.display = 'none';
+      return true;
+    }
+  }
+
+  function validateAll() {
+    const cost     = parseVal(inputProductCost);
+    const selling  = parseVal(inputSellingPrice);
+    const shipping = parseVal(inputShipping);
+    const fee      = parseVal(inputAmazonFee);
+
+    let valid = true;
+
+    // Only validate if user has typed something
+    if (inputProductCost.value !== '') {
+      if (!validateInput(inputProductCost, 'err-productCost', cost >= 0)) valid = false;
+    }
+    if (inputSellingPrice.value !== '') {
+      if (!validateInput(inputSellingPrice, 'err-sellingPrice', selling >= 0)) valid = false;
+    }
+    if (inputShipping.value !== '') {
+      if (!validateInput(inputShipping, 'err-shippingCost', shipping >= 0)) valid = false;
+    }
+    if (inputAmazonFee.value !== '') {
+      if (!validateInput(inputAmazonFee, 'err-amazonFee', fee >= 0 && fee <= 100)) valid = false;
+    }
+
+    return valid;
+  }
+
+  // ── CORE CALCULATION ─────────────────────────────────────────────
+
+  function calculate() {
+    if (!validateAll()) return;
+
+    const productCost   = parseVal(inputProductCost);
+    const sellingPrice  = parseVal(inputSellingPrice);
+    const shippingCost  = parseVal(inputShipping);
+    const amazonFeeRate = parseVal(inputAmazonFee);
+    const vatEnabled    = toggleVAT.checked;
+
+    // Fee calculations
+    const amazonFees = sellingPrice * (amazonFeeRate / 100);
+    const vat        = vatEnabled ? sellingPrice * 0.05 : 0;
+
+    // Total costs
+    const totalCosts = productCost + shippingCost + amazonFees + vat;
+
+    // Profit
+    const profit = sellingPrice - totalCosts;
+
+    // Margin and ROI (guard division by zero)
+    const margin = sellingPrice > 0
+      ? (profit / sellingPrice) * 100
+      : 0;
+
+    const investedCapital = productCost + shippingCost;
+    const roi = investedCapital > 0
+      ? (profit / investedCapital) * 100
+      : 0;
+
+    // ── UPDATE UI ─────────────────────────────────────────
+
+    // Profit display
+    profitAmount.textContent = `AED ${fmt(profit)}`;
+    setColorClass(profitAmount, profit);
+    setColorClass(profitDisplay, profit);
+    profitDisplay.classList.remove('positive', 'negative', 'neutral');
+    if (profit > 0)       profitDisplay.classList.add('positive');
+    else if (profit < 0)  profitDisplay.classList.add('negative');
+    animateEl(profitAmount);
+
+    // Margin & ROI
+    marginValue.textContent = `${fmt(margin)}%`;
+    roiValue.textContent    = `${fmt(roi)}%`;
+    setColorClass(marginValue, margin);
+    setColorClass(roiValue, roi);
+    animateEl(marginValue);
+    animateEl(roiValue);
+
+    // Status pill
+    statusPill.className = 'status-pill';
+    if (sellingPrice === 0 && productCost === 0) {
+      statusPill.textContent = '⬤  Enter values to see results';
+      statusPill.classList.add('neutral');
+    } else if (profit > 0) {
+      statusPill.innerHTML  = '✓ &nbsp;Product is Profitable';
+      statusPill.classList.add('positive');
+    } else if (profit === 0) {
+      statusPill.innerHTML  = '— &nbsp;Break Even';
+      statusPill.classList.add('neutral');
+    } else {
+      statusPill.innerHTML  = '✕ &nbsp;Not Profitable';
+      statusPill.classList.add('negative');
+    }
+
+    // Breakdown
+    bdCost.textContent     = `AED ${fmt(productCost)}`;
+    bdShipping.textContent = `AED ${fmt(shippingCost)}`;
+    bdAmazon.textContent   = `AED ${fmt(amazonFees)}`;
+    bdVat.textContent      = `AED ${fmt(vat)}`;
+    bdProfit.textContent   = `AED ${fmt(profit)}`;
+    bdProfit.style.color   = profit >= 0 ? 'var(--accent)' : 'var(--danger)';
+
+    // Show/hide VAT row
+    vatRow.style.display = vatEnabled ? 'flex' : 'none';
+  }
+
+  // ── RESET ────────────────────────────────────────────────────────
+
+  function resetCalculator() {
+    inputProductCost.value  = '';
+    inputSellingPrice.value = '';
+    inputShipping.value     = '';
+    inputAmazonFee.value    = '15';
+    toggleVAT.checked       = false;
+
+    // Clear errors
+    document.querySelectorAll('.field-error').forEach(e => e.style.display = 'none');
+    document.querySelectorAll('input[type="number"]').forEach(i => i.classList.remove('error'));
+
+    // Reset displays
+    profitAmount.textContent = 'AED 0.00';
+    profitAmount.className   = 'profit-amount neutral';
+    profitDisplay.className  = 'profit-display';
+    marginValue.textContent  = '0.00%';
+    marginValue.className    = 'metric-value neutral';
+    roiValue.textContent     = '0.00%';
+    roiValue.className       = 'metric-value neutral';
+    statusPill.className     = 'status-pill neutral';
+    statusPill.textContent   = '⬤  Enter values to see results';
+    bdCost.textContent       = 'AED 0.00';
+    bdShipping.textContent   = 'AED 0.00';
+    bdAmazon.textContent     = 'AED 0.00';
+    bdVat.textContent        = 'AED 0.00';
+    bdProfit.textContent     = 'AED 0.00';
+    bdProfit.style.color     = 'var(--accent)';
+    vatRow.style.display     = 'none';
+  }
+
+  // ── EVENT LISTENERS ──────────────────────────────────────────────
+
+  // Live calculation on every input change
+  [inputProductCost, inputSellingPrice, inputShipping, inputAmazonFee].forEach(el => {
+    el.addEventListener('input', calculate);
+    // Prevent negative values on keydown
+    el.addEventListener('keydown', function(e) {
+      if (e.key === '-') e.preventDefault();
+    });
+  });
+
+  toggleVAT.addEventListener('change', calculate);
+  btnReset.addEventListener('click', resetCalculator);
+
+  // Initial render
+  calculate();
+
+  // ── SHARE FUNCTIONS ──────────────────────────────────────────────
+
+  function shareWhatsApp() {
+    const text = encodeURIComponent('Check out this free Amazon UAE Profit Calculator — instantly calculate your profit, margin & ROI before buying any product: ' + window.location.href);
+    window.open('https://wa.me/?text=' + text, '_blank');
+  }
+
+  function copyLink() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.querySelector('.btn-share-copy');
+      const icon = document.getElementById('copyIcon');
+      const text = document.getElementById('copyText');
+      btn.classList.add('copied');
+      icon.textContent = '✓';
+      text.textContent = 'Copied!';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        icon.textContent = '🔗';
+        text.textContent = 'Copy Link';
+      }, 2200);
+    });
+  }
+</script>
+
+</body>
+</html>

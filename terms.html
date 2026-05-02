@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%2260%22%20height%3D%2260%22%20rx%3D%2214%22%20fill%3D%22%230f1624%22%20stroke%3D%22%2300d478%22%20stroke-width%3D%222.5%22/%3E%3Cpath%20d%3D%22M20%2014%20L20%2050%22%20stroke%3D%22%2300d478%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M20%2014%20L34%2014%20C42%2014%2046%2019%2046%2025%20C46%2031%2042%2036%2034%2036%20L20%2036%22%20stroke%3D%22%2300d478%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22none%22/%3E%3Cpath%20d%3D%22M28%2050%20L36%2042%20L44%2046%20L48%2038%22%20stroke%3D%22%2300c4ff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22none%22/%3E%3C/svg%3E" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms & Conditions | Amazon UAE Profit Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0f1a; --bg-card: #0f1624; --bg-input: #141d2e;
+      --border: rgba(255,255,255,0.07);
+      --text-primary: #eef2ff; --text-secondary: #8b9cc4; --text-muted: #4e5f82;
+      --accent: #00d478; --accent-dim: rgba(0,212,120,0.12);
+      --blue: #4f8ef7; --blue-dim: rgba(79,142,247,0.1);
+      --radius-lg: 20px; --font-main: 'Sora', sans-serif; --transition: 0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-main); background: var(--bg); color: var(--text-primary); line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
+    .bg-grid {
+      position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 48px 48px; pointer-events: none; z-index: 0;
+    }
+    .bg-orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; opacity: 0.25; }
+    .bg-orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(79,142,247,0.25) 0%, transparent 70%); top: -150px; right: -150px; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      background: rgba(10,15,26,0.8); border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    .nav-logo { display: flex; align-items: center; gap: 5px; font-size: 15px; font-weight: 700; color: var(--text-primary); text-decoration: none; }
+    .nav-logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), #00a85c); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .nav-back { font-size: 13px; color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color var(--transition); }
+    .nav-back:hover { color: var(--text-secondary); }
+
+    .wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    .page-header { padding: 56px 0 40px; }
+    .page-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue); background: var(--blue-dim); border: 1px solid rgba(79,142,247,0.2);
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+    }
+    .page-header h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .page-header p { font-size: 14px; color: var(--text-muted); }
+
+    .content-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 40px;
+      box-shadow: 0 2px 40px rgba(0,0,0,0.45); margin-bottom: 32px;
+    }
+    .content-card h2 {
+      font-size: 17px; font-weight: 700; margin-bottom: 12px; margin-top: 32px;
+      color: var(--text-primary); display: flex; align-items: center; gap: 10px;
+    }
+    .content-card h2:first-child { margin-top: 0; }
+    .content-card h2::before { content: ''; width: 3px; height: 16px; background: var(--blue); border-radius: 2px; flex-shrink: 0; }
+    .content-card p { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.8; }
+    .content-card ul { list-style: none; padding: 0; margin-bottom: 14px; }
+    .content-card ul li {
+      font-size: 14px; color: var(--text-secondary); padding: 6px 0 6px 20px;
+      position: relative; line-height: 1.7;
+    }
+    .content-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-size: 12px; top: 8px; }
+
+    .warning-box {
+      background: rgba(255,77,109,0.07); border: 1px solid rgba(255,77,109,0.2);
+      border-radius: 10px; padding: 16px 20px; margin: 16px 0;
+    }
+    .warning-box p { color: var(--text-primary); margin: 0; font-size: 13px; }
+
+    .highlight-box {
+      background: var(--accent-dim); border: 1px solid rgba(0,212,120,0.2);
+      border-radius: 10px; padding: 16px 20px; margin: 16px 0;
+    }
+    .highlight-box p { color: var(--text-primary); margin: 0; font-size: 13px; }
+
+    footer { border-top: 1px solid var(--border); padding: 28px 0; margin-top: 40px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    footer p { font-size: 13px; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--text-secondary); }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { animation: fadeInUp 0.5s ease both; }
+
+    @media (max-width: 600px) {
+      .content-card { padding: 24px 20px; }
+      .footer-inner { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon" style="background:none;padding:0;width:32px;height:32px;"><svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+          <rect x="2" y="2" width="60" height="60" rx="14" fill="#0f1624" stroke="#00d478" stroke-width="2.5"/>
+          <path d="M20 14 L20 50" stroke="#00d478" stroke-width="5" stroke-linecap="round"/>
+          <path d="M20 14 L34 14 C42 14 46 19 46 25 C46 31 42 36 34 36 L20 36" stroke="#00d478" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M28 50 L36 42 L44 46 L48 38" stroke="#00c4ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg></div>
+      Profit<span style="color:#00d478;">Calc</span> <span style="font-size:11px;font-weight:500;letter-spacing:0.1em;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">UAE</span>
+    </a>
+    <a href="index.html" class="nav-back">← Back to Calculator</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+  <div class="page-header fade-in">
+    <div class="page-tag">Legal</div>
+    <h1>Terms & Conditions</h1>
+    <p>Last updated: June 2025 &nbsp;·&nbsp; Please read these terms carefully before using this tool.</p>
+  </div>
+
+  <div class="content-card fade-in">
+
+    <div class="warning-box">
+      <p>⚠️ <strong>Important:</strong> This tool provides estimates only. Results should not be taken as financial advice. Always verify figures with Amazon's official fee schedule before making purchasing or business decisions.</p>
+    </div>
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing or using the ProfitCalc UAE tool ("the Tool"), you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, please do not use the Tool.</p>
+
+    <h2>2. Description of Service</h2>
+    <p>ProfitCalc UAE is a free, browser-based profit estimation tool for individuals researching Amazon UAE selling opportunities. The Tool calculates estimated profit, margin, and ROI based on values you enter.</p>
+
+    <h2>3. No Affiliation with Amazon</h2>
+    <p>ProfitCalc UAE is an independent tool and is <strong>not affiliated with, endorsed by, sponsored by, or connected to Amazon.com, Inc.</strong> or any of its subsidiaries or affiliates. "Amazon" is a trademark of Amazon.com, Inc. All references to Amazon are purely descriptive.</p>
+
+    <h2>4. Disclaimer of Accuracy</h2>
+    <p>The calculations provided by this Tool are estimates based on the values you input and general assumptions about Amazon fee structures. They may not reflect:</p>
+    <ul>
+      <li>The exact fees Amazon charges for your specific product category or account type</li>
+      <li>Changes Amazon makes to its fee schedule after the date of this tool's last update</li>
+      <li>Additional fees such as FBA storage fees, long-term storage fees, PPC advertising costs, or return processing fees</li>
+      <li>Currency fluctuations, supplier price changes, or customs/import duties</li>
+    </ul>
+    <div class="highlight-box">
+      <p>✓ Always cross-check with Amazon's official <strong>Revenue Calculator</strong> and your Seller Central account before committing capital to a product.</p>
+    </div>
+
+    <h2>5. No Financial Advice</h2>
+    <p>Nothing on this website constitutes financial, investment, legal, or business advice. The Tool is for informational and educational purposes only. You are solely responsible for any business decisions you make based on the Tool's output.</p>
+
+    <h2>6. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by applicable law, ProfitCalc UAE and its operators shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of your use of or reliance on this Tool or its results, including but not limited to financial losses, lost profits, or business decisions made based on the Tool's estimates.</p>
+
+    <h2>7. Intellectual Property</h2>
+    <p>The design, code, and content of this website are the intellectual property of ProfitCalc UAE. You may not reproduce, copy, or redistribute any part of this Tool without prior written permission.</p>
+
+    <h2>8. Modifications</h2>
+    <p>We reserve the right to modify, suspend, or discontinue the Tool at any time without notice. We may also update these Terms at any time. Continued use of the Tool after changes are posted constitutes your acceptance of the revised Terms.</p>
+
+    <h2>9. Governing Law</h2>
+    <p>These Terms shall be governed by and construed in accordance with the laws of the United Arab Emirates.</p>
+
+    <h2>10. Contact</h2>
+    <p>For questions about these Terms, please reach out via our <a href="contact.html" style="color:var(--accent); text-decoration:none;">Contact page</a>.</p>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrapper">
+    <div class="footer-inner">
+      <p>© 2025 ProfitCalc UAE — Free tool for Amazon sellers</p>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
